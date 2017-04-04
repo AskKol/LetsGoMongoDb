@@ -1,0 +1,51 @@
+﻿@model LetsGoMangoDb.Rentals.Rental
+
+@{
+    ViewBag.Title = "Attach Image";
+}
+
+<h2>Attach Image</h2>
+
+<div>
+
+    <hr />
+    @using (Html.BeginForm("AttachImage", "Rental", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="dl-horizontal">
+            <div>
+                @Html.DisplayNameFor(model => model.Description):<span>@Html.DisplayFor(model => model.Description)</span>
+            </div>
+
+            <div>
+                @Html.DisplayNameFor(model => model.NumberOfRooms):<span>@Html.DisplayFor(model => model.NumberOfRooms)</span>
+            </div>
+
+
+            <div>
+                @Html.DisplayNameFor(model => model.Price):<span>@Html.DisplayFor(model => model.Price)</span>
+            </div>
+
+            <div>
+                @Html.Label("Attach image"): <input type="file" name="file" id="file" />
+                               
+            </div>
+
+            @if (Model.HasImage(Model.ImageId))
+            {
+                <div>
+                    <img src="@Url.Action("GetImage",  new { id=Model.ImageId})" alt="Rental image" />
+                </div>
+            }
+           
+        </div>
+
+        <p>
+            <input type="submit" value="Up load" />
+            @*@Html.ActionLink("Upload","Rental",new { id=Model.Id})*@  |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+</div>

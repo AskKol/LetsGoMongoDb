@@ -1,0 +1,60 @@
+﻿@model LetsGoMangoDb.Rentals.RentalListViewModel
+
+@{
+    ViewBag.Title = "Rental Listings";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    <lable for="PriceLimit">Price limit</lable>
+    <input type="text" name="PriceLimit" value="@Model.Filters.PriceLimit" />
+    <input type="submit" value="Search" />
+}
+<p>
+    @Html.ActionLink("Post Rental", "PostARental")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rentals.FirstOrDefault().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rentals.FirstOrDefault().NumberOfRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rentals.FirstOrDefault().Price)
+        </th>
+        <th>
+            Last Adjustment
+        </th>
+        <th>@String.Empty</th>
+
+    </tr>
+
+    @foreach (var rental in Model.Rentals)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => rental.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => rental.NumberOfRooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => rental.Price)
+            </td>
+            <td>
+                @(rental.Adjustments != null && rental.Adjustments.Any() ? rental.Adjustments.Select(a => a.Describe()).LastOrDefault() : String.Empty)
+            </td>
+            <td> </td>
+            <td>
+                @Html.ActionLink("Adjust Price", "AdjustPrice", new { id = rental.Id }) |
+                @Html.ActionLink("Adjust other details", "AdjustDetails", new { id = rental.Id }) |
+                @Html.ActionLink("Attach image(s)", "AttachImage", new { id = rental.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = rental.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -102,9 +102,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BsonDocumentTests.cs" />
+    <Compile Include="BsonDocumentTests.cs" />
+    <Compile Include="PocoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Rental\RentalTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
