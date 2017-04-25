@@ -207,7 +207,7 @@ namespace LetsGoMangoDb.Controllers
 
 
                 var bytes = bucket.DownloadAsBytes(new ObjectId(id));
-                var filter = Builders<Rental>.Filter.Where(f => f.ImageId == new ObjectId(id).ToString());
+                //var filter = Builders<Rental>.Filter.Where(f => f.ImageId == new ObjectId(id).ToString());
                 var aRental = context.Rentals.Find(f => f.ImageId == id).FirstOrDefault();
 
                 return File(bytes, aRental != null && !String.IsNullOrEmpty(aRental.ImageType) ? aRental.ImageType:"png");
